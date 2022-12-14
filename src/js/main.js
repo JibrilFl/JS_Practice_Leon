@@ -1,5 +1,5 @@
 import MainSlider from "./modules/slider/sliderMain";
-import MiniSlider from "./modules/slider/slider-min";
+import MiniSlider from "./modules/slider/sliderMini";
 import VideoPlayer from "./modules/playVideo";
 
 window.addEventListener('DOMContentLoaded', () => {
