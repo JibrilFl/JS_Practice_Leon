@@ -5028,6 +5028,13 @@ window.addEventListener('DOMContentLoaded', function () {
     container: '.page'
   });
   slider.render();
+  var modulPageSlider = new _modules_slider_sliderMain__WEBPACK_IMPORTED_MODULE_0__["default"]({
+    container: '.moduleapp',
+    btns: '.next',
+    prevmodule: '.prevmodule',
+    nextmodule: '.nextmodule'
+  });
+  modulPageSlider.render();
   var showUpSlider = new _modules_slider_sliderMini__WEBPACK_IMPORTED_MODULE_1__["default"]({
     container: '.showup__content-slider',
     prev: '.showup__prev',
@@ -5438,6 +5445,10 @@ var Slider = function Slider() {
       next = _ref$next === void 0 ? null : _ref$next,
       _ref$prev = _ref.prev,
       prev = _ref$prev === void 0 ? null : _ref$prev,
+      _ref$prevmodule = _ref.prevmodule,
+      prevmodule = _ref$prevmodule === void 0 ? null : _ref$prevmodule,
+      _ref$nextmodule = _ref.nextmodule,
+      nextmodule = _ref$nextmodule === void 0 ? null : _ref$nextmodule,
       _ref$activeClass = _ref.activeClass,
       activeClass = _ref$activeClass === void 0 ? '' : _ref$activeClass,
       animate = _ref.animate,
@@ -5454,6 +5465,8 @@ var Slider = function Slider() {
   this.btns = document.querySelectorAll(btns);
   this.prev = document.querySelector(prev);
   this.next = document.querySelector(next);
+  this.prevmodule = document.querySelectorAll(prevmodule);
+  this.nextmodule = document.querySelectorAll(nextmodule);
   this.activeClass = activeClass;
   this.animate = animate;
   this.autoplay = autoplay;
@@ -5528,10 +5541,10 @@ var MainSlider =
 function (_Slider) {
   _inherits(MainSlider, _Slider);
 
-  function MainSlider(btns) {
+  function MainSlider(btns, prevmodule, nextmodule) {
     _classCallCheck(this, MainSlider);
 
-    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, btns));
+    return _possibleConstructorReturn(this, _getPrototypeOf(MainSlider).call(this, btns, prevmodule, nextmodule));
   }
 
   _createClass(MainSlider, [{
@@ -5573,28 +5586,51 @@ function (_Slider) {
       this.showSlides(this.slideIndex += n);
     }
   }, {
-    key: "render",
-    value: function render() {
+    key: "addSwitching",
+    value: function addSwitching(btns, n) {
       var _this2 = this;
 
-      try {
+      // btns - массив кнопок
+      // n - шаг переключения слайдов
+      btns.forEach(function (item) {
+        item.addEventListener('click', function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          _this2.plusSlides(n);
+        });
+      });
+    }
+  }, {
+    key: "bindTriggers",
+    value: function bindTriggers() {
+      var _this3 = this;
+
+      this.btns.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          _this3.plusSlides(1);
+        });
+        btn.parentNode.previousElementSibling.addEventListener('click', function (e) {
+          e.preventDefault();
+          _this3.slideIndex = 1;
+
+          _this3.showSlides(_this3.slideIndex);
+        });
+      });
+      this.addSwitching(this.prevmodule, -1);
+      this.addSwitching(this.nextmodule, 1);
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      if (this.container) {
         try {
           this.hanson = document.querySelector('.hanson');
         } catch (e) {}
 
-        this.btns.forEach(function (btn) {
-          btn.addEventListener('click', function () {
-            _this2.plusSlides(1);
-          });
-          btn.parentNode.previousElementSibling.addEventListener('click', function (e) {
-            e.preventDefault();
-            _this2.slideIndex = 1;
-
-            _this2.showSlides(_this2.slideIndex);
-          });
-        });
         this.showSlides(this.slideIndex);
-      } catch (e) {}
+        this.bindTriggers();
+      }
     }
   }]);
 
