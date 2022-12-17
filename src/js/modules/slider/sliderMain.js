@@ -1,8 +1,8 @@
 import Slider from "./slider";
 
 export default class MainSlider extends Slider {
-	constructor(btns, prevmodule, nextmodule) {
-		super(btns, prevmodule, nextmodule);
+	constructor(btns, prevModule, nextModule) {
+		super(btns, prevModule, nextModule);
 	}
 
 	showSlides(n) {
@@ -64,8 +64,8 @@ export default class MainSlider extends Slider {
 			});
 		});
 
-		this.addSwitching(this.prevmodule, -1);
-		this.addSwitching(this.nextmodule, 1);
+		this.addSwitching(this.prevModule, -1);
+		this.addSwitching(this.nextModule, 1);
 	}
 
 

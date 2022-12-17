@@ -14,8 +14,8 @@ export default class Slider {
 		this.btns = document.querySelectorAll(btns);
 		this.prev = document.querySelector(prev);
 		this.next = document.querySelector(next);
-		this.prevmodule = document.querySelectorAll(prevmodule);
-		this.nextmodule = document.querySelectorAll(nextmodule);
+		this.prevModule = document.querySelectorAll(prevmodule);
+		this.nextModule = document.querySelectorAll(nextmodule);
 		this.activeClass = activeClass;
 		this.animate = animate;
 		this.autoplay = autoplay;
